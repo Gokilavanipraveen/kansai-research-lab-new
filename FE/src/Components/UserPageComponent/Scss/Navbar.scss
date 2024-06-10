@@ -1,0 +1,42 @@
+
+// Navbar.scss
+@import "~bootstrap/scss/bootstrap";
+
+.navbar {
+  background-color: gray;
+  padding: 10px 20px;
+  .nav-link {
+    color: #fff;
+    
+    &:hover {
+      color: #ccc;
+    }
+  }
+}
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav {
+      display: contents;
+  }
+}
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  

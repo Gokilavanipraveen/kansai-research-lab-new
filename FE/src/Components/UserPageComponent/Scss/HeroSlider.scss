@@ -1,0 +1,11 @@
+$primaryColor: #3498db; // Define a variable for primary color
+$basecolor: #070808;
+$purple:#7e7bb9;
+$white:white;
+.slidercontainer {
+  color: $primaryColor; // Use the variable for font color
+  
+  .itemcontainer h3{
+    color: $white
+  }
+}

@@ -1,10 +1,13 @@
 
 // Navbar.scss
 @import "~bootstrap/scss/bootstrap";
+body .navbar-clicked {
+  background-color: lightblue; /* Apply your desired styles here */
+}
 
 .navbar {
   background-color: gray;
-  padding: 10px 20px;
+  padding: 10px 80px;
   .nav-link {
     color: #fff;
     
@@ -12,31 +15,22 @@
       color: #ccc;
     }
   }
+
+ .navbarstyle {
+  li {
+    .dropdown .dropdown-menu{
+      display: block;
+      ul li{
+        list-style-type: none;
+      } a{
+        color: black;
+      }
+    }
+  }
+}
 }
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-nav {
       display: contents;
   }
 }
-  
-  .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar li {
-    display: inline;
-    margin-right: 20px;
-  }
-  
-  .navbar a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .navbar a:hover {
-    text-decoration: underline;
-  }
-  

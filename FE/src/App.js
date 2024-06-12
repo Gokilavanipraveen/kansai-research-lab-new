@@ -4,16 +4,12 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import "./Components/UserPageComponent/css/header.css";
 import Footer from "./Components/Common/Footer";
-import Navbar from "./Components/Common/Navbar";
-
-import Sample from "./Sample/sample";
 
 function App() {
   return (
     <>
       <div className="App">
         <Router>
-          <Navbar />
           <header className="app-header">
             <nav className="nav-bar">
               <img src={Logo} className="App-logo" alt="Logo" />
@@ -42,7 +38,6 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Sample />
         </Router>
 
         <Footer />

@@ -1,30 +1,86 @@
 // Navbar.js
 
-import React from "react";
+import React, { useState } from "react";
 import "../UserPageComponent/Scss/Navbar.scss";
 import { Link } from "react-router-dom";
-function Navbar() {
+import Filter from "./FilterSearch";
+import CategoryList from "./CategoryList";
+import Popup from "./popup/popup";
+
+const Navbar = ({ images }) => {
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [dropdownList, setDropdownList] = useState();
+  if (
+    (images && filteredCategories === "undefined") ||
+    (images && filteredCategories.length === 0)
+  ) {
+    setFilteredCategories(images);
+    const namesArray = images && images?.map((image) => image.category);
+    if (namesArray) {
+      const uniqueValuesSet = new Set(namesArray);
+      const uniqueValuesArray = [...uniqueValuesSet];
+      setDropdownList(uniqueValuesArray);
+    }
+  }
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen1, setIsOpen1] = useState(false);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  const togglePopup = () => {
+    setIsOpen1(!isOpen1);
+  };
+  const togglePopup1 = () => {
+    setIsOpen1(!isOpen1);
+  };
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark">
-      <div className="container">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/Products">Products</Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
+    <nav className=" navbar-expand-lg navbar-dark navbar">
+      <div className="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul className="navbar-nav ml-auto navbarstyle">
+          <li className="nav-item active">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/Products" className="nav-link">
+              Products
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <div className="dropdown">
+              <button
+                onClick={toggleDropdown}
+                className="dropdown-toggle nav-link"
+              >
+                Catagories
+              </button>
+              {isOpen && (
+                <div className="dropdown-menu">
+                  <ul>
+                    {(images && dropdownList === "undefined") ||
+                    (images && dropdownList.length === 0) ? (
+                      <li>Empty</li>
+                    ) : (
+                      dropdownList.map((a) => (
+                        <li>
+                          <a className="nav-link" href={a}>
+                            {" "}
+                            {a}
+                          </a>
+                        </li>
+                      ))
+                    )}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </li>
+        </ul>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

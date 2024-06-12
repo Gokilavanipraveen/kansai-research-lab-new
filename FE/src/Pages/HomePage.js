@@ -2,7 +2,9 @@
 import { fetchData } from "../Components/API";
 import { useState, useEffect } from "react";
 import Slider from "../Components/UserPageComponent/Carousel/HeroSlider";
-
+import Sample from "../Sample/aapp";
+import Navbar from "../Components/Common/Navbar";
+import Categories from "../Components/UserPageComponent/Categories/Category";
 function HomePageFunc() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
@@ -21,10 +23,19 @@ function HomePageFunc() {
       getData();
     }
   }, [loading]);
-
   return (
     <>
-      <Slider images={data} />
+      {!data ? (
+        " Loading............"
+      ) : (
+        <>
+          <Navbar images={data} />
+          <div className="contentContainer">
+            <Slider images={data} />
+            <Categories CategoriesList={data} />
+          </div>
+        </>
+      )}
     </>
   );
 }

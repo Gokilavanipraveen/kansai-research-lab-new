@@ -2,10 +2,7 @@
 
 import React, { useState } from "react";
 import "../UserPageComponent/Scss/Navbar.scss";
-import { Link } from "react-router-dom";
-import Filter from "./FilterSearch";
-import CategoryList from "./CategoryList";
-import Popup from "./popup/popup";
+import { Link, useHistory } from "react-router-dom";
 
 const Navbar = ({ images }) => {
   const [filteredCategories, setFilteredCategories] = useState([]);
@@ -23,16 +20,16 @@ const Navbar = ({ images }) => {
     }
   }
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen1, setIsOpen1] = useState(false);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const togglePopup = () => {
-    setIsOpen1(!isOpen1);
+  const history = useHistory();
+
+  const handleNavItemClicked = (path) => {
+    history.push(path);
   };
-  const togglePopup1 = () => {
-    setIsOpen1(!isOpen1);
-  };
+
   return (
     <nav className=" navbar-expand-lg navbar-dark navbar">
       <div className="collapse navbar-collapse " id="navbarSupportedContent">
@@ -64,11 +61,10 @@ const Navbar = ({ images }) => {
                       <li>Empty</li>
                     ) : (
                       dropdownList.map((a) => (
-                        <li>
-                          <a className="nav-link" href={a}>
-                            {" "}
+                        <li key={a}>
+                          <Link className="nav-link" to={`/page/${a}`}>
                             {a}
-                          </a>
+                          </Link>
                         </li>
                       ))
                     )}

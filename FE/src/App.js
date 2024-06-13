@@ -4,8 +4,29 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import "./Components/UserPageComponent/css/header.css";
 import Footer from "./Components/Common/Footer";
-
+import { fetchData } from "./Components/API";
+import { useState, useEffect } from "react";
+import ProductPage from "./Pages/ProductPage";
+import Navbar from "./Components/Common/Navbar";
 function App() {
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState();
+
+  useEffect(() => {
+    if (!loading) {
+      const getData = async () => {
+        try {
+          const fetchedData = await fetchData();
+          setProducts(fetchedData);
+          setLoading(true);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getData();
+    }
+  }, [loading]);
+
   return (
     <>
       <div className="App">
@@ -35,9 +56,9 @@ function App() {
               </Link>
             </nav>
           </header>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
+          <Navbar images={products} />
+          <Route exact path="/" render={() => <HomePage data={products} />} />
+          <Route path="/products" component={ProductPage} />
         </Router>
 
         <Footer />

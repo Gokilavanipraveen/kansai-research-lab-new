@@ -1,40 +1,21 @@
-import React, { useState } from "react";
-import Popup from "../../Common/popup/popup";
-import { useHistory } from "react-router-dom";
-function ProductDetail() {
-  const pathSegments = window.location.pathname.split("/");
+import "../css/CardComponent.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Popup from "./popup/popup";
+import { useEffect, useState } from "react";
+import Axios from "axios";
 
-  // Get the last segment from the pathSegments array
-  const lastSegment = pathSegments[pathSegments.length - 1];
-  const apiUrl = `http://localhost:3003/products?category=${lastSegment}`;
-
-  const [responseJson, setResponseJson] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  if (!loading) {
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setResponseJson(data);
-        setLoading(true);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }
-  const history = useHistory();
-
-  const goBack = () => {
-    history.goBack();
-  };
-
+const Card = () => {
   const [isOpen1, setIsOpen] = useState(false);
   const [currentproduct, setCurrentproduct] = useState();
+  useEffect(() => {
+    saveData();
+  });
+  const [products, setProducts] = useState([]);
+  const saveData = async () => {
+    const response = await Axios.get("http://localhost:3003/products");
+    setProducts(response.data);
+  };
+
   const togglePopup = (image) => {
     setIsOpen(!isOpen1);
     setCurrentproduct(image);
@@ -43,29 +24,29 @@ function ProductDetail() {
     setIsOpen(!isOpen1);
   };
   return (
-    <div>
-      <h2>hfkjsdghfh </h2>
-      {responseJson &&
-        responseJson?.map((product, index) => {
-          return (
-            <div key={index}>
+    <div className="cardComponent container">
+      <div className="row g-3">
+        <h2 align="center">Categories</h2>
+        {products &&
+          products?.map((image) => {
+            return (
               <div className="col-md-4 col-6">
-                <div className="card" key={product.id}>
+                <div className="card" key={image.id}>
                   <img
                     className="card-img-top img-fit"
-                    src={product.image}
+                    src={image.image}
                     alt="card"
                   />
                   <div className="card-body">
-                    <h2 className="card-title">{product.title}</h2>
-                    <p className="card-text">{product.subtitle}</p>
+                    <h2 className="card-title">{image.title}</h2>
+                    <p className="card-text">{image.subtitle}</p>
                     <div className="text-end">
                       <input
                         className="btn  btn-primary"
                         type="button"
                         value="View Details"
                         //onClick={togglePopup(image.id)}
-                        onClick={() => togglePopup(product)}
+                        onClick={() => togglePopup(image)}
                       />
                       {isOpen1 && (
                         <Popup
@@ -93,12 +74,10 @@ function ProductDetail() {
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      <button onClick={goBack}>Previous Page</button>
+            );
+          })}
+      </div>
     </div>
   );
-}
-
-export default ProductDetail;
+};
+export default Card;

@@ -26,10 +26,6 @@ const Navbar = ({ images }) => {
   };
   const history = useHistory();
 
-  const handleNavItemClicked = (path) => {
-    history.push(path);
-  };
-
   return (
     <nav className=" navbar-expand-lg navbar-dark navbar">
       <div className="collapse navbar-collapse " id="navbarSupportedContent">

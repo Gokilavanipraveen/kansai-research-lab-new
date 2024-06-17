@@ -1,0 +1,46 @@
+.rows input[type="text"],
+.insertProduct {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.StockUpdate {
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.stockTable td,
+.stockTable th {
+    border: 0px solid #ddd;
+    padding: 8px;
+}
+
+.stockTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.stockTable tr:hover {
+    background-color: #ddd;
+}
+
+.stockTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #9892ce;
+    color: white;
+}
+.formAction{
+    display: flex;
+    padding-top: 100px ! important;
+}
+.updateForm{    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display:none;
+}
